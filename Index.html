@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Para Guñi 💜</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- PANTALLA DE ENTRADA -->
+
+<section id="welcome">
+
+
+<div class="welcome-box">
+
+
+<h1>
+Para mi Guñi 💜
+</h1>
+
+
+<p>
+Preparé algo especial para ti...
+<br>
+pero solo podrás verlo si aceptas este pequeño regalo ✨
+</p>
+
+
+
+<button id="start">
+
+Abrir mi regalo 💜
+
+</button>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- CONTENIDO PRINCIPAL -->
+
+
+<main id="app">
+
+
+<header>
+
+
+<h1>
+Mi universo contigo 💜
+</h1>
+
+
+<p>
+Cada día contigo es un recuerdo que quiero guardar
+</p>
+
+
+</header>
+
+
+
+
+
+<!-- CONTADOR -->
+
+
+<section class="glass">
+
+
+<h2>
+🎂 Falta poco para tu cumpleaños
+</h2>
+
+
+<div class="counter">
+
+
+<div>
+<span id="days">
+00
+</span>
+
+Días
+
+</div>
+
+
+<div>
+
+<span id="hours">
+00
+</span>
+
+Horas
+
+</div>
+
+
+<div>
+
+<span id="minutes">
+00
+</span>
+
+Minutos
+
+</div>
+
+
+<div>
+
+<span id="seconds">
+00
+</span>
+
+Segundos
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- JUEGOS -->
+
+
+<section class="glass">
+
+
+<h2>
+🎮 Misiones de amor
+</h2>
+
+
+<p>
+Cada día una nueva aventura se desbloquea para ti 💜
+</p>
+
+
+
+<div class="missions">
+
+
+<div class="mission active" id="day1">
+
+<div class="level">
+01
+</div>
+
+<div class="icon">
+💜
+</div>
+
+<h3>
+Nuestra historia
+</h3>
+
+<p>
+El comienzo de algo bonito
+</p>
+
+<button onclick="abrirMision(1)">
+Jugar
+</button>
+
+</div>
+
+
+
+
+
+<div class="mission locked" id="day2">
+
+<div class="level">
+02
+</div>
+
+<div class="icon">
+🔒
+</div>
+
+<h3>
+Nuestros recuerdos
+</h3>
+
+<p>
+Un momento especial
+</p>
+
+<button onclick="abrirMision(2)">
+Jugar 💜
+</button>
+
+</div>
+
+
+
+
+
+<div class="mission locked" id="day3">
+
+
+<div class="level">
+03
+</div>
+
+
+<div class="icon">
+🔒
+</div>
+
+
+<h3>
+Un detalle para ti
+</h3>
+
+
+<p>
+Una pequeña sorpresa
+</p>
+
+
+<button onclick="abrirMision(3)">
+Jugar 💜
+</button>
+
+
+</div>
+
+
+
+
+
+
+<div class="mission locked" id="day4">
+
+
+<div class="level">
+04
+</div>
+
+
+<div class="icon">
+🔒
+</div>
+
+
+<h3>
+La misión final
+</h3>
+
+
+<p>
+El regalo más importante
+</p>
+
+
+<button onclick="abrirMision(4)">
+Jugar 💜
+</button>
+
+
+</div>
+
+
+
+</div>
+
+<div id="game"></div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- RECUERDOS -->
+
+
+<section class="glass">
+
+
+<h2>
+📸 Nuestros recuerdos
+</h2>
+
+
+
+<div class="gallery">
+
+
+<img src="img/foto1.jpg">
+
+<img src="img/foto2.jpg">
+
+<img src="img/foto3.jpg">
+
+<img src="img/foto4.jpg">
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- 100 FORMAS -->
+
+
+<section class="glass">
+
+
+<h2>
+💌 100 maneras de amarte
+</h2>
+
+
+<button class="action" id="love">
+
+Descubrir
+
+</button>
+
+
+<div id="loveText">
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- MUSICA -->
+
+
+<audio id="music" loop>
+
+<source src="music/Soloparati.mp3">
+
+</audio>
+
+
+
+
+
+</main>
+
+
+
+
+<script src="js/script.js"></script>
+
+
+</body>
+
+</html>
