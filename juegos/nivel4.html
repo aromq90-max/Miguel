@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nivel 4 - Guñi 💜</title>
+
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap');
+
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+
+
+body{
+
+height:100vh;
+
+overflow:hidden;
+
+font-family:Poppins,sans-serif;
+
+color:white;
+
+background:
+
+linear-gradient(
+180deg,
+#c77dff,
+#5a189a,
+#10002b
+);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+
+
+
+.contenedor{
+
+width:100%;
+
+height:100vh;
+
+text-align:center;
+
+padding:15px;
+
+}
+
+
+
+
+h1{
+
+font-family:'Great Vibes';
+
+font-size:65px;
+
+text-shadow:
+
+0 0 30px white;
+
+}
+
+
+
+
+#estado{
+
+font-size:20px;
+
+margin-bottom:10px;
+
+}
+
+
+
+
+canvas{
+
+width:95%;
+
+max-width:500px;
+
+height:auto;
+
+
+border-radius:30px;
+
+
+background:
+
+linear-gradient(
+180deg,
+#240046,
+#5a189a
+);
+
+
+box-shadow:
+
+0 0 40px #e0aaff;
+
+
+touch-action:none;
+
+
+}
+
+
+
+
+
+#pantallaFinal{
+
+
+position:fixed;
+
+inset:0;
+
+
+display:none;
+
+
+background:
+
+rgba(16,0,43,.96);
+
+
+
+justify-content:center;
+
+align-items:center;
+
+
+flex-direction:column;
+
+
+padding:30px;
+
+
+text-align:center;
+
+
+z-index:10;
+
+
+}
+
+
+
+#pantallaFinal h2{
+
+font-family:'Great Vibes';
+
+font-size:65px;
+
+}
+
+
+
+
+#carta{
+
+font-size:18px;
+
+line-height:1.7;
+
+max-width:500px;
+
+
+}
+
+
+
+
+button{
+
+
+margin-top:25px;
+
+
+padding:15px 40px;
+
+
+border:none;
+
+
+border-radius:50px;
+
+
+font-size:18px;
+
+
+font-weight:bold;
+
+
+background:white;
+
+
+color:#5a189a;
+
+
+}
+
+
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="contenedor">
+
+
+<h1>
+🎂 Guñi 💜
+</h1>
+
+
+
+<div id="estado">
+
+
+Fase:
+
+<span id="fase">
+1
+</span>
+
+
+<br>
+
+
+Puntos:
+
+<span id="puntos">
+0
+</span>
+
+
+</div>
+
+
+
+<canvas id="juego"
+
+width="500"
+
+height="700">
+
+</canvas>
+
+
+
+</div>
+
+
+
+
+
+<div id="pantallaFinal">
+
+
+<h2>
+Feliz cumpleaños 💜
+</h2>
+
+
+
+<div id="carta">
+
+</div>
+
+
+
+<button onclick="location.href='../index.html'">
+
+Volver 💜
+
+</button>
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+// ======================================
+// CONFIGURACIÓN
+// ======================================
+
+
+const canvas =
+document.getElementById("juego");
+
+
+const ctx =
+canvas.getContext("2d");
+
+
+
+const ancho =
+canvas.width;
+
+
+const alto =
+canvas.height;
+
+
+
+let fase = 1;
+
+
+let puntos = 0;
+
+
+
+let jugador={
+
+x:250,
+
+y:600,
+
+emoji:"💜"
+
+};
+
+
+
+let objetos=[];
+
+
+let corazonesFinal=[];
+
+
+let confeti=[];
+
+
+let regaloAbierto=false;
+
+
+
+// ======================================
+// MOVIMIENTO CELULAR
+// ======================================
+
+
+canvas.addEventListener(
+"touchmove",
+function(e){
+
+
+e.preventDefault();
+
+
+
+let rect =
+canvas.getBoundingClientRect();
+
+
+
+let dedo =
+e.touches[0];
+
+
+
+jugador.x =
+(dedo.clientX - rect.left)
+*
+(canvas.width / rect.width);
+
+
+
+jugador.y =
+(dedo.clientY - rect.top)
+*
+(canvas.height / rect.height);
+
+
+
+},
+{
+passive:false
+});
+
+canvas.addEventListener(
+"mousemove",
+function(e){
+
+
+let rect =
+canvas.getBoundingClientRect();
+
+
+jugador.x =
+(e.clientX - rect.left)
+*
+(canvas.width / rect.width);
+
+
+jugador.y =
+(e.clientY - rect.top)
+*
+(canvas.height / rect.height);
+
+
+});
+
+
+// ======================================
+// CREAR OBJETOS
+// ======================================
+
+
+function crearObjeto(){
+
+
+let lista=[];
+
+
+
+if(fase===1){
+
+
+lista=[
+
+"💜",
+
+"🌹",
+
+"💔"
+
+];
+
+
+}
+
+
+
+if(fase===2){
+
+
+lista=[
+
+"🎁",
+
+"⭐",
+
+"💜",
+
+"💣"
+
+];
+
+
+}
+
+
+
+let tipo =
+lista[
+Math.floor(
+Math.random()*lista.length
+)
+];
+
+
+
+objetos.push({
+
+x:Math.random()*450+25,
+
+y:-50,
+
+velocidad:
+2+Math.random()*3,
+
+tipo:tipo
+
+
+});
+
+
+}
+
+
+
+
+// ======================================
+// DIBUJAR
+// ======================================
+
+
+function dibujarJugador(){
+
+
+ctx.font="60px Arial";
+
+ctx.textAlign="center";
+
+
+ctx.fillText(
+
+jugador.emoji,
+
+jugador.x,
+
+jugador.y
+
+);
+
+
+}
+
+
+
+
+function dibujarObjetos(){
+
+
+objetos.forEach(obj=>{
+
+
+ctx.font="45px Arial";
+
+
+ctx.fillText(
+obj.tipo,
+obj.x,
+obj.y
+);
+
+
+});
+
+
+}
+
+
+
+// ======================================
+// MOVIMIENTO OBJETOS
+// ======================================
+
+
+function moverObjetos(){
+
+
+objetos.forEach(obj=>{
+
+
+obj.y += obj.velocidad;
+
+
+});
+
+
+
+objetos =
+objetos.filter(
+obj=>obj.y < alto+80
+);
+
+
+}
+
+
+
+
+
+// ======================================
+// COLISIONES
+// ======================================
+
+
+function revisarColisiones(){
+
+
+
+objetos.forEach((obj,index)=>{
+
+
+let distancia =
+Math.hypot(
+
+jugador.x-obj.x,
+
+jugador.y-obj.y
+
+);
+
+
+
+if(distancia < 60){
+
+
+
+objetos.splice(index,1);
+
+
+
+if(
+
+obj.tipo==="💜" ||
+
+obj.tipo==="🌹" ||
+
+obj.tipo==="🎁" ||
+
+obj.tipo==="⭐"
+
+){
+
+
+puntos++;
+
+
+}
+
+
+
+
+if(
+
+obj.tipo==="💔" ||
+
+obj.tipo==="💣"
+
+){
+
+
+puntos--;
+
+
+if(puntos<0)
+
+puntos=0;
+
+
+}
+
+
+
+document.getElementById(
+"puntos"
+).innerHTML=puntos;
+
+
+
+cambiarFase();
+
+
+
+}
+
+
+
+});
+
+
+}
+
+
+
+
+
+
+// ======================================
+// CAMBIO DE FASE
+// ======================================
+
+
+function cambiarFase(){
+
+
+
+if(fase===1 && puntos>=10){
+
+
+fase=2;
+
+
+objetos=[];
+
+
+document.getElementById(
+"fase"
+).innerHTML="2";
+
+
+}
+
+
+
+
+
+if(fase===2 && puntos>=25){
+
+
+fase=3;
+
+
+objetos=[];
+
+
+document.getElementById(
+"fase"
+).innerHTML="FINAL";
+
+
+iniciarFinal();
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+// ======================================
+// FASE FINAL
+// ======================================
+
+
+function iniciarFinal(){
+
+
+corazonesFinal=[];
+
+
+
+for(let i=0;i<10;i++){
+
+
+corazonesFinal.push({
+
+x:
+Math.random()*400+50,
+
+
+y:
+Math.random()*450+100,
+
+
+activo:true
+
+
+});
+
+
+}
+
+
+
+}
+
+
+
+
+function dibujarFinal(){
+
+
+
+corazonesFinal.forEach(c=>{
+
+
+if(c.activo){
+
+
+ctx.font="50px Arial";
+
+
+ctx.fillText(
+
+"💖",
+
+c.x,
+
+c.y
+
+);
+
+
+
+}
+
+
+});
+
+
+
+
+if(regaloAbierto){
+
+
+ctx.font="100px Arial";
+
+
+ctx.fillText(
+
+"🎁",
+
+250,
+
+350
+
+);
+
+
+}
+
+
+
+}
+
+
+
+
+
+canvas.addEventListener(
+"click",
+tocarCorazon
+);
+
+
+
+canvas.addEventListener(
+"touchstart",
+function(e){
+
+
+let dedo=e.touches[0];
+
+let rect=
+canvas.getBoundingClientRect();
+
+
+
+tocarCorazon({
+
+clientX:dedo.clientX,
+
+clientY:dedo.clientY
+
+});
+
+
+
+}
+
+);
+
+
+
+
+
+function tocarCorazon(e){
+
+
+if(fase!==3)
+
+return;
+
+
+
+let rect =
+canvas.getBoundingClientRect();
+
+
+
+let x =
+(e.clientX-rect.left)
+*
+(canvas.width/rect.width);
+
+
+
+let y =
+(e.clientY-rect.top)
+*
+(canvas.height/rect.height);
+
+
+
+
+corazonesFinal.forEach(c=>{
+
+
+
+let distancia =
+Math.hypot(
+
+x-c.x,
+
+y-c.y
+
+);
+
+
+
+if(distancia<60){
+
+
+c.activo=false;
+
+
+}
+
+
+
+});
+
+
+
+
+let quedan =
+corazonesFinal.filter(
+c=>c.activo
+).length;
+
+
+
+if(quedan===0){
+
+
+abrirRegalo();
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+// ======================================
+// REGALO FINAL
+// ======================================
+
+
+function abrirRegalo(){
+
+
+
+if(regaloAbierto)
+
+return;
+
+
+
+regaloAbierto=true;
+
+
+
+crearConfeti();
+
+
+
+setTimeout(()=>{
+
+
+
+document.getElementById(
+"pantallaFinal"
+).style.display="flex";
+
+
+
+document.getElementById(
+"carta"
+).innerHTML=
+
+
+`
+
+💜 Guñi 💜
+
+<br><br>
+
+
+✨ Lo lograste ✨
+
+<br><br>
+
+
+Encontraste todos los corazones mágicos.
+
+<br><br>
+
+
+Nuestro primer recuerdo:
+
+🎬 Dumbo
+
+
+<br><br>
+
+
+Nuestro aniversario:
+
+💜 19 de febrero
+
+
+<br><br>
+
+
+Tu color favorito:
+
+💜 Morado
+
+
+<br><br>
+
+
+Gracias por cada momento,
+cada sonrisa y cada recuerdo.
+
+
+<br><br>
+
+
+🎂 Feliz cumpleaños Guñi 💜
+
+
+`;
+
+
+
+},1200);
+
+
+
+}
+
+
+
+
+
+
+
+// ======================================
+// CONFETI
+// ======================================
+
+
+function crearConfeti(){
+
+
+for(let i=0;i<80;i++){
+
+
+confeti.push({
+
+x:
+Math.random()*ancho,
+
+y:
+Math.random()*alto,
+
+emoji:
+
+[
+
+"💜",
+"💖",
+"✨",
+"🌹",
+"🎉"
+
+]
+[
+Math.floor(
+Math.random()*5
+)
+],
+
+velocidad:
+1+Math.random()*4
+
+
+});
+
+
+}
+
+
+
+}
+
+
+
+
+
+function dibujarConfeti(){
+
+
+
+confeti.forEach(c=>{
+
+
+ctx.font="30px Arial";
+
+
+ctx.fillText(
+
+c.emoji,
+
+c.x,
+
+c.y
+
+);
+
+
+
+c.y+=c.velocidad;
+
+
+
+if(c.y>alto){
+
+c.y=-20;
+
+}
+
+
+
+});
+
+
+}
+
+
+
+
+
+
+// ======================================
+// LOOP PRINCIPAL
+// ======================================
+
+
+function juego(){
+
+
+
+ctx.clearRect(
+
+0,
+
+0,
+
+ancho,
+
+alto
+
+);
+
+
+
+
+
+if(fase===1 || fase===2){
+
+
+dibujarObjetos();
+
+
+moverObjetos();
+
+
+revisarColisiones();
+
+
+}
+
+
+
+
+
+dibujarJugador();
+
+
+
+
+
+if(fase===3){
+
+
+dibujarFinal();
+
+
+}
+
+
+
+
+
+dibujarConfeti();
+
+
+
+requestAnimationFrame(
+juego
+);
+
+
+
+}
+
+
+
+
+
+
+
+setInterval(()=>{
+
+
+if(fase===1 || fase===2){
+
+
+crearObjeto();
+
+
+}
+
+
+
+},700);
+
+
+
+
+
+
+// INICIAR
+
+
+juego();
+
+
+</script>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,711 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&display=swap');
+
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+:root{
+
+    --purple-dark:#10002b;
+    --purple:#5a189a;
+    --purple-light:#c77dff;
+    --pink:#e0aaff;
+    --white:#ffffff;
+
+}
+
+
+
+body{
+
+    min-height:100vh;
+
+    font-family:'Poppins',sans-serif;
+
+    color:white;
+
+    background:
+
+    radial-gradient(circle at top,
+    #9d4edd,
+    #5a189a 40%,
+    #10002b 100%);
+
+    overflow-x:hidden;
+
+}
+
+
+/* ==========================
+   FONDO ANIMADO
+========================== */
+
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    width:100%;
+
+    height:100%;
+
+    background-image:
+
+    radial-gradient(white 1px,transparent 1px);
+
+    background-size:50px 50px;
+
+    opacity:.25;
+
+    animation:stars 20s linear infinite;
+
+    z-index:-1;
+
+}
+
+
+
+@keyframes stars{
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+    to{
+
+        transform:translateY(-300px);
+
+    }
+
+}
+
+
+
+
+/* ==========================
+   PANTALLA INICIAL
+========================== */
+
+
+#welcome{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #10002b,
+    #5a189a,
+    #9d4edd
+    );
+
+    z-index:100;
+
+}
+
+
+
+.welcome-box{
+
+    text-align:center;
+
+    max-width:700px;
+
+    padding:40px;
+
+    animation:entrada 1.5s ease;
+
+}
+
+
+
+@keyframes entrada{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+
+.welcome-box h1{
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:90px;
+
+    margin-bottom:20px;
+
+    text-shadow:
+
+    0 0 20px #ffffff;
+
+}
+
+
+
+.welcome-box p{
+
+    font-size:20px;
+
+    line-height:1.8;
+
+    color:#f3d9ff;
+
+    margin-bottom:35px;
+
+}
+
+
+
+
+/* ==========================
+   BOTONES
+========================== */
+
+
+button{
+
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:16px 45px;
+
+    border-radius:50px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:#240046;
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #e0aaff,
+    #ffffff
+    );
+
+
+    box-shadow:
+
+    0 0 20px #e0aaff;
+
+
+    transition:.4s;
+
+
+}
+
+
+
+button:hover{
+
+
+    transform:scale(1.1);
+
+    box-shadow:
+
+    0 0 40px white;
+
+
+}
+
+
+
+
+/* ==========================
+   APP
+========================== */
+
+
+#app{
+
+
+    display:none;
+
+    padding:40px 20px;
+
+    animation:aparecer 1s ease;
+
+}
+
+
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+
+
+
+header{
+
+    text-align:center;
+
+    margin-bottom:50px;
+
+}
+
+
+
+header h1{
+
+
+    font-family:'Great Vibes';
+
+    font-size:90px;
+
+    text-shadow:
+
+    0 0 25px #ffffff;
+
+
+}
+
+
+
+
+header p{
+
+    font-size:20px;
+
+}
+
+
+
+
+/* ==========================
+   TARJETAS GLASS
+========================== */
+
+
+.glass{
+
+
+    max-width:950px;
+
+    margin:35px auto;
+
+    padding:35px;
+
+
+    background:
+
+    rgba(255,255,255,.15);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.25);
+
+
+    backdrop-filter:
+
+    blur(20px);
+
+
+
+    border-radius:35px;
+
+
+    box-shadow:
+
+    0 20px 60px rgba(0,0,0,.3);
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+.glass h2{
+
+    margin-bottom:25px;
+
+    font-size:32px;
+
+}
+
+
+
+
+/* ==========================
+   CONTADOR
+========================== */
+
+
+.counter{
+
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+
+}
+
+
+
+.counter div{
+
+
+    min-width:130px;
+
+    padding:25px;
+
+
+    background:
+
+    rgba(255,255,255,.15);
+
+
+    border-radius:25px;
+
+
+}
+
+
+
+.counter span{
+
+
+    display:block;
+
+    font-size:45px;
+
+    font-weight:700;
+
+
+}
+
+
+
+
+/* ==========================
+   GALERIA
+========================== */
+
+
+.gallery{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(200px,1fr));
+
+
+    gap:20px;
+
+
+}
+
+
+
+.gallery img{
+
+
+    width:100%;
+
+    height:250px;
+
+    object-fit:cover;
+
+
+    border-radius:25px;
+
+
+    transition:.5s;
+
+
+}
+
+
+
+.gallery img:hover{
+
+
+    transform:
+
+    translateY(-10px)
+    scale(1.05);
+
+
+    box-shadow:
+
+    0 0 30px #e0aaff;
+
+
+}
+
+
+
+
+/* ==========================
+   TEXTOS ESPECIALES
+========================== */
+
+
+#loveText,
+#game{
+
+
+    margin-top:25px;
+
+    font-size:22px;
+
+    min-height:40px;
+
+
+}
+
+
+
+
+
+/* ==========================
+   CELULAR
+========================== */
+
+
+@media(max-width:600px){
+
+
+.welcome-box h1,
+header h1{
+
+    font-size:60px;
+
+}
+
+
+
+.welcome-box p{
+
+    font-size:16px;
+
+}
+
+
+.glass{
+
+    padding:25px;
+
+}
+
+
+
+.counter span{
+
+    font-size:35px;
+
+}
+
+
+
+}
+
+/* ==========================
+   MISIONES 2x2
+========================== */
+
+
+.missions{
+
+    display:grid;
+
+    grid-template-columns:repeat(2, 1fr);
+
+    gap:25px;
+
+    margin-top:30px;
+
+}
+
+
+
+.mission{
+
+    background:
+    rgba(255,255,255,.18);
+
+    border-radius:25px;
+
+    padding:30px 20px;
+
+    min-height:220px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    transition:.5s;
+
+    border:
+    1px solid rgba(255,255,255,.3);
+
+}
+
+
+
+.mission span{
+
+    font-size:55px;
+
+}
+
+
+
+.mission h3{
+
+    font-size:30px;
+
+    margin:15px 0;
+
+}
+
+
+
+.mission p{
+
+    font-size:15px;
+
+    opacity:.9;
+
+}
+
+
+
+.mission:hover{
+
+    transform:
+    translateY(-10px)
+    scale(1.03);
+
+    box-shadow:
+    0 0 35px #e0aaff;
+
+}
+
+
+
+.locked{
+
+    filter:grayscale(1);
+
+    opacity:.55;
+
+}
+
+
+
+.locked:hover{
+
+    transform:none;
+
+    box-shadow:none;
+
+}
+
+
+
+/* CELULAR */
+
+@media(max-width:600px){
+
+
+    .missions{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+}
+
+.mission.active{
+
+animation:pulse 3s infinite;
+
+}
+
+
+@keyframes pulse{
+
+0%{
+box-shadow:0 0 20px #e0aaff;
+}
+
+50%{
+box-shadow:0 0 45px white;
+}
+
+100%{
+box-shadow:0 0 20px #e0aaff;
+}
+
+}
